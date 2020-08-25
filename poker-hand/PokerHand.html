@@ -162,21 +162,32 @@
             return 'White win by type';
         }
 
-        if (getTypeOfPoker(black) === STRAIGHT || getTypeOfPoker(black) === STRAIGHT_FLUSH) {
-            if (toPreparedPokerValue(black)[0] > toPreparedPokerValue(white)[0]) {
-                return 'Black win by type';
-            } else if (toPreparedPokerValue(black)[0] < toPreparedPokerValue(white)[0]) {
-                return 'Black win by type';
-            } else return "Tie";
-        } else return "Tie"
+        if (getTypeOfPoker(black) === STRAIGHT || getTypeOfPoker(black) === STRAIGHT_FLUSH || getTypeOfPoker(black) === FLUSH || getTypeOfPoker(black) === HIGH_CARD) {
+            for (let i = 0; i < 5; i++) {
+                if (toPreparedPokerValue(black)[i] > toPreparedPokerValue(white)[i]) {
+                    return 'Black win by type';
+                } else if (toPreparedPokerValue(black)[i] < toPreparedPokerValue(white)[i]) {
+                    return 'White win by type';
+                }
+            }
+            return "Tie";
+        }
 
+        if (getTypeOfPoker(black) === FOUR_OF_A_KIND) {
 
+        }
+
+        if (getTypeOfPoker(black) === FULL_HOUSE) {
+
+        }
+
+        return "Tie"
     }
 
     $(function () {
-        let white = ['5H', '6C', '8D', '7S', '9D'];
-        let black = ['4H', '5C', '7D', '3S', 'QD'];
-        console.log(isStraight(toPreparedPokerValue(white)));
+        let white = ['5H', '6C', '7D', '8S', '4D'];
+        let black = ['4H', '5C', '7D', '3S', '6D'];
+        console.log(comparePoker(black, white));
     })
 </script>
 </html>
