@@ -26,16 +26,16 @@
 
     function convertPokerToNumber(card) {
         if (card === 'J') {
-            return 11;
+            return '11';
         }
         if (card === 'Q') {
-            return 12;
+            return '12';
         }
         if (card === 'K') {
-            return 13;
+            return '13';
         }
         if (card === 'A') {
-            return 14;
+            return '14';
         }
         return card;
     }
@@ -45,7 +45,7 @@
         for (i = 0; i < 5; i++) {
             pokerValue[i] = convertPokerToNumber(poker[i].substring(0, 1));
         }
-        return pokerValue.sort();
+        return pokerValue.sort(function(a, b){return b-a});
     }
 
     // count duplicate
@@ -71,9 +71,9 @@
     }
 
     function isFlush(poker) {
-        let firstSuit = poker[0].substring(1, 1);
+        let firstSuit = poker[0].substr(1, 1);
         for (i = 1; i < 5; i++) {
-            let currentSuit = poker[i].substring(1, 1);
+            let currentSuit = poker[i].substr(1, 1);
             if (currentSuit !== firstSuit) {
                 return false;
             }
@@ -101,9 +101,8 @@
 
     function getTypeOfPoker(poker) {
         let pokerValue = toPreparedPokerValue(poker);
-        let isFlush = isFlush(poker);
 
-        if (isStraight(pokerValue) && isFlush) {
+        if (isStraight(pokerValue) && isFlush(poker)) {
             return STRAIGHT_FLUSH;
         }
 
@@ -117,7 +116,7 @@
             return FULL_HOUSE;
         }
 
-        if (isFlush) {
+        if (isFlush(poker)) {
             return FLUSH;
         }
 
@@ -167,18 +166,16 @@
             } else if (toPreparedPokerValue(black)[0] < toPreparedPokerValue(white)[0]){
                 return 'Black win by type';
             } else return "Tie";
-        }
+        } else return "Tie"
 
 
 
     }
 
     $(function () {
-        let white = ['5H', '6C', '8D', '2S', 'JD'];
+        let white = ['5H', '6C', '8D', '7S', '9D'];
         let black = ['4H', '5C', '7D', '3S', 'QD'];
-
-
-
+        console.log(isStraight(black));
     })
 </script>
 </html>
