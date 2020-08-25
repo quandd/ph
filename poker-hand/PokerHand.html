@@ -45,7 +45,9 @@
         for (i = 0; i < 5; i++) {
             pokerValue[i] = convertPokerToNumber(poker[i].substring(0, 1));
         }
-        return pokerValue.sort(function(a, b){return b-a});
+        return pokerValue.sort(function (a, b) {
+            return b - a
+        });
     }
 
     // count duplicate
@@ -62,8 +64,8 @@
 
     // find straight
     function isStraight(pokerValue) {
-        for (i = 1; i < 5; i++) {
-            if (pokerValue[i] !== pokerValue[i-1] - 1) {
+        for (i = 0; i < 4; i++) {
+            if (pokerValue[i] - pokerValue[i + 1] !== 1) {
                 return false;
             }
             return true;
@@ -151,7 +153,7 @@
         return HIGH_CARD;
     }
 
-    function comparePoker (black, white) {
+    function comparePoker(black, white) {
         if (getTypeOfPoker(black) > getTypeOfPoker(white)) {
             return 'Black win by type';
         }
@@ -163,11 +165,10 @@
         if (getTypeOfPoker(black) === STRAIGHT || getTypeOfPoker(black) === STRAIGHT_FLUSH) {
             if (toPreparedPokerValue(black)[0] > toPreparedPokerValue(white)[0]) {
                 return 'Black win by type';
-            } else if (toPreparedPokerValue(black)[0] < toPreparedPokerValue(white)[0]){
+            } else if (toPreparedPokerValue(black)[0] < toPreparedPokerValue(white)[0]) {
                 return 'Black win by type';
             } else return "Tie";
         } else return "Tie"
-
 
 
     }
@@ -175,7 +176,7 @@
     $(function () {
         let white = ['5H', '6C', '8D', '7S', '9D'];
         let black = ['4H', '5C', '7D', '3S', 'QD'];
-        console.log(isStraight(black));
+        console.log(isStraight(toPreparedPokerValue(white)));
     })
 </script>
 </html>
